@@ -23,3 +23,32 @@ function fibsRec(number) {
     return temp;
   }
 }
+
+function mergeSort(arr) {
+  const length = arr.length;
+
+  if (length <= 1) return arr;
+  else {
+    const leftHalf = Math.floor(length / 2);
+
+    const left = mergeSort(arr.slice(0, leftHalf));
+    const right = mergeSort(arr.slice(leftHalf, length));
+
+    let i = 0;
+    let j = 0;
+    const result = [];
+
+    while (i < left.length && j < right.length) {
+      if (left[i] <= right[j]) {
+        result.push(left[i]);
+        i++;
+      } else {
+        result.push(right[j]);
+        j++;
+      }
+    }
+
+    result.push(...left.slice(i, left.length), ...right.slice(j, right.length));
+    return result;
+  }
+}
